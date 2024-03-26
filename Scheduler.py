@@ -247,12 +247,12 @@ class FIFO(NonPreemptive):
             self.find_start_events(time)
             if (equals(self, time)):
                  break
-            self.fifo_finish_events = self.finish_events
-            self.fifo_deadline_events = self.deadline_events
-            self.fifo_arrival_events = self.arrival_events
-            self.fifo_start_events = self.start_events
+            self.fifo_finish_events[time] = self.finish_events
+            self.fifo_deadline_events[time] = self.deadline_events
+            self.fifo_arrival_events[time] = self.arrival_events
+            self.fifo_start_events[time] = self.start_events
             time += 1
-        self.output_file.terminate_write()
+        #self.output_file.terminate_write()
 
 class SJF(NonPreemptive):
 

@@ -44,11 +44,13 @@ def import_file(file_path, output_file):
         _deadline = int(node.attrib.get('deadline', -1))
         _wcet = int(node.attrib['wcet'])
 
-        if _id < 0 or _wcet <= 0 or (_type == 'periodic' and _period <= 0) or (_type == 'sporadic' and _activation <= 0):
+        #print(_id, _wcet, _type, _period, _activation)
+        if _id < 0 or _wcet <= 0 or (_type == 'periodic' and _period <= 0) or (_type == 'sporadic' and _activation < 0):
+            print(_id, _wcet, _type, _period, _activation)
             raise Exception('Non-positive values are saved in the file')
 
-        if (_wcet > _period != -1) or (_deadline != -1 and _deadline < _wcet):
-            raise Exception('Inconsistent values are saved in the file')
+        #if (_wcet > _period != -1) or (_deadline != -1 and _deadline < _wcet):
+            #raise Exception('Inconsistent values are saved in the file')
 
         task = Task.Task(_real_time, _type, _id, _period, _activation, _deadline, _wcet)
         scheduler.tasks.append(task)
